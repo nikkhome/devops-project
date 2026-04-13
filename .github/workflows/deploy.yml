@@ -1,0 +1,26 @@
+name: Enterprise-GitOps-Pipeline
+
+on:
+  push:
+      branches: [ main ] 
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+      steps:
+        - name: Checkout Code
+        uses: actions/checkout@v3
+
+        - name: Build Docker Image
+        run: |
+          docker build -t my-monitor:v1 ./app
+
+        -name: Import Image to K3d
+        run: |
+          k3d image import my-monitor:v1 -c my-cloud
+
+        - name: Terraform Deploy
+        run: |
+          ./tf.sh init
+          ./tf.sh apply -auto-approve
