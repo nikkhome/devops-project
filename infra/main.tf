@@ -11,8 +11,14 @@ variable "k8s_host" {
   type = string
 }
 
+variable "k8s_token" {
+  type      = string
+  sensitive = true
+}
+
 provider "kubernetes" {
   host        = var.k8s_host
+  token       = var.k8s_token
  # config_path = "~/.kube/config"
   insecure    = true
 }
