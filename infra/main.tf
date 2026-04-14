@@ -7,7 +7,12 @@ terraform {
   }
 }
 
+variable "k8s_host" {
+  type = string
+}
+
 provider "kubernetes" {
+  host        = var.k8s_host
  # config_path = "~/.kube/config"
   insecure    = true
 }
