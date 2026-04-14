@@ -2,13 +2,13 @@ name: Enterprise-GitOps-Pipeline
 
 on:
   push:
-      branches: [ main ] 
+      branches: [ main ]
 
 jobs:
   deploy:
     runs-on: self-hosted
 
-      steps:
+    steps:
         - name: Checkout Code
         uses: actions/checkout@v3
 
