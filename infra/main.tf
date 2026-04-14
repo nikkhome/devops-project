@@ -9,9 +9,10 @@ terraform {
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
+  insecure    = true
 }
 
-resource "kubernetes_deployment" "bash_app" {
+resource "kubernetes_deployment_v1" "bash_app" {
   metadata {
      name = "bash-monitor"
      labels = { app = "monitor" }
@@ -26,7 +27,7 @@ resource "kubernetes_deployment" "bash_app" {
         container {
           name = "monitor-container"
           image = "my-monitor:v1"
-          image_pull_policy = "Never"
+          image_pull_policy = "Always"
           
           port {
             container_port = 80
@@ -37,7 +38,7 @@ resource "kubernetes_deployment" "bash_app" {
   }
 }
 
-resource "kubernetes_service" "monitor_service" {
+resource "kubernetes_service_v1" "monitor_service" {
   metadata {
     name = "monitor-service"
     }
