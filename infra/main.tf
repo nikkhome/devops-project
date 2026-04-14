@@ -26,7 +26,7 @@ resource "kubernetes_deployment_v1" "bash_app" {
       spec {
         container {
           name = "monitor-container"
-          image = "my-monitor:v1"
+          image = "nikkhome/bash-monitor:latest"
           image_pull_policy = "Always"
           
           port {
